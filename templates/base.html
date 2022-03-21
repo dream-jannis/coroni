@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='basestyle.css') }}">
+    <title>Document</title>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>	
+    <nav>
+        <div class="container">
+          <a href="#" id="brand">Coroni</a>
+          <button>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          
+          <ul class="navbar-menu">
+            <li><a class="hov-nav" href="/">Startseite</a></li>
+            <li><a class="hov-nav" href="/t_appointments">Testtermin</a></li>
+            <li><a class="hov-nav" href="/impf_appointments">Impftermin</a></li>
+            <li><a class="hov-nav" href="/profil">Mein Profil</a></li>
+            <li><a class="hov-nav" href="#">page d</a></li>
+          </ul>
+          
+        </div>
+      </nav>
+{% block main %}
+{% endblock %}
+</body>
+</html>
