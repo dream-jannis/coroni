@@ -1,15 +1,23 @@
 import mysql.connector
 
-from secrets import hostname, username, password
+#from secretscoroni import hostnamee, usernamee, passworde, databe
 from helpers.db_create import create_database
+
+
+hostname = "localhost"
+username = "root"
+password = "password"
+datab = "coronacentre"
+
 
 mydb = mysql.connector.connect(
     host = hostname,
     user = username,
     passwd = password,
+    database = datab,
 )
 
-my_cursor = mydb.cursor()
+my_cursor = mydb.cursor(buffered=True)
 
 my_cursor.execute("SHOW DATABASES")
 for db in my_cursor:
@@ -25,8 +33,21 @@ if db_exist == False:
 else:
     print("Datebank existiert bereits.")
 
-#def pull(query):
-#    my_cursor.execute(query)
-#    for db in my_cursor:
-#        #print(db)
-#        return db
+def query(query):
+    my_cursor.execute("USE coronacentre")
+    my_cursor.execute(query)
+    mydb.commit()
+    for db in my_cursor:
+        print(db)
+
+def push(table, columns, values):
+    my_cursor.execute("USE coronacentre")
+    my_cursor.execute(f"INSERT INTO {table}({columns}) VALUES({values})")
+    mydb.commit()
+
+def pull(column, table):  
+    my_cursor.execute("USE coronacentre")
+    my_cursor.execute(f"SELECT {column} FROM {table}")
+    mydb.commit()
+    for db in my_cursor:
+        print(db)

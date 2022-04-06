@@ -33,7 +33,7 @@ def create_database():
         )""")
 
     my_cursor.execute("""CREATE TABLE customers(
-        customer_id INT PRIMARY KEY,
+        customer_id INT AUTO_INCREMENT PRIMARY KEY,
         surname VARCHAR(100),
         name VARCHAR(100),
         birthday DATE,
