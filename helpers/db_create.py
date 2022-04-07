@@ -1,18 +1,19 @@
 import mysql.connector
 
-from secrets import hostname, username, password
+from coronisecrets import hostname, username, password,datab
 
 mydb = mysql.connector.connect(
     host = hostname,
     user = username,
     passwd = password,
+    database = datab,
 )
 
 my_cursor = mydb.cursor()
 
 def create_database():
     my_cursor.execute("CREATE DATABASE coronacentre")
-    my_cursor.execute("USE coronacentre")
+    #my_cursor.execute("USE coronacentre")
 
     my_cursor.execute("""CREATE TABLE vax_status(
         status_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -36,6 +37,8 @@ def create_database():
         customer_id INT AUTO_INCREMENT PRIMARY KEY,
         surname VARCHAR(100),
         name VARCHAR(100),
+        email VARCHAR(100),
+        password VARCHAR(100),
         birthday DATE,
         address_id INT,
         status_id INT,

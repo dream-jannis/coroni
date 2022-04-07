@@ -4,8 +4,29 @@
 {% block main %}
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-Deine Termine:
-Noch keine Termine
+<p>!Du kannst keine Termine in der Vergangenheit oder zuweit in der Zukunft ausmachen -- MySQL hat da auch iwie nen Problem mit!</p>
+<h2>Deine Termine:</h2>
+<h1>{{timestamp}}</h1>
+<table>
+    <tr>
+        <th>Zeitpunkt</th>
+        <th>Testart</th>
+        <th>Ergebniss</th>
+    </tr>
+    <tr>
+        {% for row in timestamp %}
+        <td>{{row.timestamp}}</td>
+        {% endfor %}
+        <!--
+        {% for row in testtype %}
+        <td>{{row.testtype}}</td>
+        {% endfor %}
+        -->
+        {% for row in result %}
+        <td>{{row.result}}</td>
+        {% endfor %}
+    </tr>
+</table>
 
 Termin ausmachen:
 <form class="form1" method="POST">

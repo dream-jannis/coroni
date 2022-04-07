@@ -1,8 +1,47 @@
-{% extends "base.html" %}
-{% block head %}
-{% endblock %}
-{% block main %}
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-reg
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='regstyle.css')}}">
+  <title></title>
+</head>
+
+<body>
+  <div class="main">
+    <p class="sign" align="center">Registriere dich!</p>
+    <form class="form1" method="POST">
+      <input class="un " type="email" name="email" align="center" placeholder="E-Mail">
+      <input class="un" type="password" name="password" align="center" placeholder="Password">
+      <input class="un" type="text" name="surname" align="center" placeholder="Vorname">
+      <input class="un" type="text" name="name" align="center" placeholder="Nachname">
+      <input class="un" type="date" name="birthday" align="center" placeholder="Geburstag">
+      <p>&nbsp;</p>
+      Anschrift:
+      <input class="un" type="street" name="street" align="center" placeholder="Straße">
+      <input class="un" type="number" name="number" align="center" placeholder="Hausnummer">
+      <input class="un" type="number" name="plz" align="center" placeholder="Postleitzahl">
+      <input class="un" type="text" name="city" align="center" placeholder="Wohnort/ Stadt">
+      <input class="un" type="text" name="state" align="center" placeholder="Bundesland">
+      <input class="un" type="text" name="country" align="center" placeholder="Land">
+      <p>&nbsp;</p>
+      Angaben zu vorherigen Impfungen:
+      Bist du geimpft:
+        
+      Wie oft wurdest du geimpft:
+      <input class="un" type="number" name="anzahl_impf" align="center" placeholder="2">
+      Last Impf??
+      <input class="un" type="date" name="last_impf" align="center" placeholder="gestern">
+
+      Bist du genesen?
+      Wie oft bist du genesen?
+      <input class="un" type="number" name="anzahl_impf" align="center" placeholder="2">
+      Last RECC??
+      <input class="un" type="date" name="last_rec" align="center" placeholder="gestern">
+
+      <button type="submit" class="submit" align="center">Fertig</button>    
+      <p>&nbsp;</p> 
+    </form>
+  </div>
+</body>
+</html>

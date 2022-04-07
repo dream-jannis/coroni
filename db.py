@@ -1,14 +1,12 @@
 import mysql.connector
 
-#from secretscoroni import hostnamee, usernamee, passworde, databe
+#from coronisecrets import hostname, username, password, datab
 from helpers.db_create import create_database
-
 
 hostname = "localhost"
 username = "root"
 password = "password"
 datab = "coronacentre"
-
 
 mydb = mysql.connector.connect(
     host = hostname,
@@ -34,20 +32,9 @@ else:
     print("Datebank existiert bereits.")
 
 def query(query):
-    my_cursor.execute("USE coronacentre")
+    #my_cursor.execute("USE coronacentre")
     my_cursor.execute(query)
     mydb.commit()
-    for db in my_cursor:
-        print(db)
-
-def push(table, columns, values):
-    my_cursor.execute("USE coronacentre")
-    my_cursor.execute(f"INSERT INTO {table}({columns}) VALUES({values})")
-    mydb.commit()
-
-def pull(column, table):  
-    my_cursor.execute("USE coronacentre")
-    my_cursor.execute(f"SELECT {column} FROM {table}")
-    mydb.commit()
-    for db in my_cursor:
-        print(db)
+    #for db in my_cursor:
+        #print(db)
+    return my_cursor.fetchall()
