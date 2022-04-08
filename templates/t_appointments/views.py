@@ -1,6 +1,8 @@
+import re
 from flask import Blueprint, render_template, request
 
 from helpers.decorator import login_required
+from helpers.dateparse import parse
 from db import query
 
 t_appointments = Blueprint("t_appointments", __name__, template_folder="pages")
@@ -10,16 +12,25 @@ t_appointments = Blueprint("t_appointments", __name__, template_folder="pages")
 def main():
     #Daten aus DB abfragen
     timestamp = query("SELECT datetime FROM test_appoints")#WHERE userid == session iwie sowas
-    #testtype = query("SELECT ")
     result = query("SELECT result FROM test_appoints")
-    #timestamp = list(timestamp)
-    #result = list(result)
+   
+
+    data = ()
+    timestamplist = []
+    result = (result)
+    print("hallo")
+    for row in timestamp:
+        timestamprow = parse(row)
+        timestamplist.append(str(timestamprow))
+        
+
+    print("liste ",timestamplist)
+
+    data=(timestamplist,result)
+
+    print("data ", data)
     
-    print("timestamp list: ", timestamp[0])
-    print("result list: ",result)
-    print(type(result))
-    print(type(timestamp))
-    print("das ist print timestamp ", timestamp)
+
     if request.method == "POST":
         #Daten in DB eintragen
         testdate = request.form["date"]
@@ -28,14 +39,10 @@ def main():
         query(f"INSERT INTO test_appoints(datetime) VALUES('{testdt}')")
     
         return render_template('t_appointments.html', 
-            timestamp = timestamp, 
-            #testtype = testtype, 
-            result = result
+            data = data,
         )
 
     else:
         return render_template('t_appointments.html',
-            timestamp = timestamp, 
-            #testtype = testtype, 
-            result = result
+            data = data, 
         )

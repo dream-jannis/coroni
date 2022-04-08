@@ -1,4 +1,13 @@
-timestamp = "(datetime.datetime(2022, 4, 28, 22, 22),)"
-timestamp = timestamp[19:37]
-timestamp = timestamp.replace(",","")
-print(timestamp[0:4])
+from datetime import datetime
+
+def parse(date):
+    timestamp = str(date)
+    timestamp = timestamp.replace("datetime","")
+    timestamp = timestamp.replace(".","")
+    timestamp = timestamp.replace("(","")
+    timestamp = timestamp.replace(")","")
+    timestamp = timestamp.replace(",","")
+
+    timestamp = datetime.strptime(timestamp, '%Y %m %d %H %M')
+
+    return timestamp
