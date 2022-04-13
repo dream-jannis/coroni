@@ -1,4 +1,5 @@
 import re
+from unittest import TestCase
 from flask import Blueprint, render_template, request
 
 from helpers.decorator import login_required
@@ -15,20 +16,14 @@ def main():
     result = query("SELECT result FROM test_appoints")
    
 
-    data = ()
-    timestamplist = []
-    result = (result)
-    print("hallo")
+    data = []
+    i = 0
+
     for row in timestamp:
         timestamprow = parse(row)
-        timestamplist.append(str(timestamprow))
-        
-
-    print("liste ",timestamplist)
-
-    data=(timestamplist,result)
-
-    print("data ", data)
+        data.append(str(timestamprow))
+        data.append(str(result[i]))
+        i = i + 1
     
 
     if request.method == "POST":
