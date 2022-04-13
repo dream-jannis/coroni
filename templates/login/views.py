@@ -20,40 +20,18 @@ def main():
         if not usern or not user_password:
             return render_template("login.html")
 
-        #hardcoded login testuser
-        """
-        if usern == "test":
-            if user_password == "test":
-                session["logged_in"] = True
-                session["admin_logged_in"] = True
-                session["admin_username"] = "test"
-                session["username"] = "test"
-                return redirect(url_for("index.main"))
-            else:
-                return render_template("login.html")
-        else:
-            return render_template("login.html")
-        """
-        query = "SELECT email FROM customers WHERE email = 'testender@test.de'"
+        query = f"SELECT email FROM customers WHERE email = '{usern}'"
         usern_req = select_request(query)
 
-        print(usern_req[0])
-        print(type(usern_req[0]))
-
-
-        query = "SELECT password FROM customers WHERE password = 'test1'"
+        query = f"SELECT password FROM customers WHERE password = '{user_password}'"
         passwd_req = select_request(query)
-        #passwd_req = (passwd_req[2:-3])
-
-        print(passwd_req[0])
-  
 
         if usern == usern_req[0]:
             if user_password == passwd_req[0]:
                 session["logged_in"] = True
                 session["admin_logged_in"] = True
-                #session["admin_username"] = "test"
-                #session["username"] = "test"
+                session["admin_username"] = "test"
+                session["username"] = "test"
                 return redirect(url_for("index.main"))
             else:
                 return render_template("login.html")
@@ -72,5 +50,18 @@ def logout():
     return redirect(url_for("login.main"))
 
 
-
+#hardcoded login testuser
+    """
+    if usern == "test":
+        if user_password == "test":
+            session["logged_in"] = True
+            session["admin_logged_in"] = True
+            session["admin_username"] = "test"
+            session["username"] = "test"
+            return redirect(url_for("index.main"))
+        else:
+            return render_template("login.html")
+    else:
+        return render_template("login.html")
+    """
 
