@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for
 
 from helpers.decorator import login_required
-from db import query
+from db import insert_request
 
 impf_appointments = Blueprint("impf_appointments", __name__, template_folder="pages")
 
@@ -15,7 +15,7 @@ def main():
         testdt = (f"{testdate} {testtime}:00")
         print(testdt)
         print("bis hier hin gehts")
-        query(f"INSERT INTO test_appoints(datetime) VALUES('{testdt}')")
+        insert_request(f"INSERT INTO test_appoints(datetime) VALUES('{testdt}')")
         return render_template('impf_appointments.html')
 
 
