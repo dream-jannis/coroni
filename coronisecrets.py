@@ -1,4 +1,4 @@
 hostname = "localhost"
 username = "root"
-password = "password"
+password = "root"
 datab = "coronacentre"

@@ -1,6 +1,11 @@
 import mysql.connector
+from helpers.db_create import create_database
+#from coronisecrets import hostname, username, password,datab
 
-from coronisecrets import hostname, username, password,datab
+hostname = "localhost"
+username = "root"
+password = "root"
+datab = "coronacentre"
 
 mydb = mysql.connector.connect(
     host = hostname,
@@ -11,9 +16,22 @@ mydb = mysql.connector.connect(
 
 my_cursor = mydb.cursor()
 
+my_cursor.execute("SHOW DATABASES")
+for db in my_cursor:
+    if "coronacentre" in db:
+        db_exist = True
+        break
+    else:
+        db_exist = False
+
+if db_exist == False:
+    print("Datenbank existiert noch nicht. DB wird nun erstellt.")
+    create_database()
+else:
+    print("Datebank existiert bereits.")
+
 def create_database():
     my_cursor.execute("CREATE DATABASE coronacentre")
-    #my_cursor.execute("USE coronacentre")
 
     my_cursor.execute("""CREATE TABLE vax_status(
         status_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -92,3 +110,5 @@ def create_database():
         )""")
 
     print("Datenbank wurde erstellt.")
+
+create_database()

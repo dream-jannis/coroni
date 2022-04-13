@@ -2,11 +2,11 @@ import email
 from turtle import st
 from flask import render_template, request, session, Blueprint
 
-from db import query
+from db import connect, select_request, disconnect
 
 register = Blueprint("register", __name__, template_folder="pages")
 
-@register.route('/', methods=('GET','POST'))
+@register.route('/', methods=['POST', 'GET'])
 def main():
     if request.method == "POST":
         mail = request.form['email']
@@ -27,4 +27,23 @@ def main():
 
         print(mail, password, surname, lastname, birthday, street, housenumber, plz, city, state, country, impf_count, last_impf, rec_count, last_rec)
         
+        
+        query = f"INSERT INTO vax_status(impf_count, rec_count, last_impf, last_rec) VALUES('{impf_count}, {rec_count}, {last_impf}, {last_rec});"
+        connect()
+        select_request(query)
+        disconnect()
+
+        query = f"INSERT INTO address(housenumber, street, plz, city, state, country) VALUES('{housenumber}, {street}, {plz}, {city}, {state}, {country}');"
+        connect()
+        select_request(query)
+        disconnect()
+
+        query = f"INSERT INTO customers(surname, name, email, password, birthday) VALUES('{surname}, {lastname}, {mail}, {password}, {birthday}');"
+        connect()
+        select_request(query)
+        disconnect()
+
+
+        return render_template('register.html')
+
     return render_template('register.html')
