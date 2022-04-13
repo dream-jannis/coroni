@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request
 
 from helpers.decorator import login_required
 from helpers.dateparse import parse
-from db import query
+from db import select_request
 
 t_appointments = Blueprint("t_appointments", __name__, template_folder="pages")
 

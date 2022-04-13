@@ -1,17 +1,17 @@
 import mysql.connector
 from helpers.db_create import create_database
-#from coronisecrets import hostname, username, password,datab
+from coronisecrets import hostname, username, password,datab
 
-hostname = "localhost"
-username = "root"
-password = "root"
-datab = "coronacentre"
+#hostname = "localhost"
+#username = "root"
+#password = "root"
+#datab = "coronacentre"
 
 mydb = mysql.connector.connect(
     host = hostname,
     user = username,
     passwd = password,
-    database = datab,
+    #database = datab,
 )
 
 my_cursor = mydb.cursor()
@@ -32,6 +32,7 @@ else:
 
 def create_database():
     my_cursor.execute("CREATE DATABASE coronacentre")
+    my_cursor.execute("use coronacentre")
 
     my_cursor.execute("""CREATE TABLE vax_status(
         status_id INT AUTO_INCREMENT PRIMARY KEY,

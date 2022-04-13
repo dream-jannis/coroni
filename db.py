@@ -5,8 +5,38 @@ import mysql.connector
 from coronisecrets import hostname, username, password, datab
 
 
+def select_request(query):
+    try:
+        connection = mysql.connector.connect(host = hostname,
+                                            user = username,
+                                            passwd = password,
+                                            database = datab, )
+        my_cursor = connection.cursor()
+        print("connected")
+        my_cursor.execute(query)
+        print("query ausgeführt")
+        #connection.commit()
+        row = my_cursor.fetchone()
+        print("fetched")
+        output = row
+                
+        
+        print("success")
+        my_cursor.close()
+
+        return output
+
+    except mysql.connector.Error as error:
+        print("failed".format(error))
+    
+    finally:
+        if connection.is_connected():
+            connection.close()
 
 
+
+
+"""
 def connect(self):
     self.my_db = mysql.connector.connect(host = hostname,
         user = username,
@@ -26,9 +56,4 @@ def select_request(query, self):
 def disconnect(self):   
     self.mydb.close()
     
-
-
-
-"""
-
 """

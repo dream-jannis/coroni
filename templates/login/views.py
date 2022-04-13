@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, url_for, redirect, request, session
-from coronisecrets import hostname, username, password, datab
-from db import connect, select_request, disconnect
+#from coronisecrets import hostname, username, password, datab
+from db import select_request
 
 
 login = Blueprint("login", __name__, template_folder="pages")
@@ -34,18 +34,22 @@ def main():
         else:
             return render_template("login.html")
         """
-        query = "SELECT email FROM customers WHERE email = {usern};"
-        connect()
+        query = "SELECT email FROM customers WHERE email = 'testender@test.de'"
         usern_req = select_request(query)
-        disconnect()
 
-        query = "SELECT password FROM customers WHERE password = {password};"
-        connect()
+        print(usern_req[0])
+        print(type(usern_req[0]))
+
+
+        query = "SELECT password FROM customers WHERE password = 'test1'"
         passwd_req = select_request(query)
-        disconnect()
+        #passwd_req = (passwd_req[2:-3])
 
-        if usern == usern_req:
-            if user_password == passwd_req:
+        print(passwd_req[0])
+  
+
+        if usern == usern_req[0]:
+            if user_password == passwd_req[0]:
                 session["logged_in"] = True
                 session["admin_logged_in"] = True
                 #session["admin_username"] = "test"
