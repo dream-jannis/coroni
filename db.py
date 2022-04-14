@@ -12,16 +12,15 @@ def select_request(query):
                                             passwd = password,
                                             database = datab, )
         my_cursor = connection.cursor()
-        print("connected")
+        #print("connected")
         my_cursor.execute(query)
-        print("query ausgeführt")
-        #connection.commit()
+        #print("query ausgeführt")
         row = my_cursor.fetchone()
-        print("fetched")
+       # print("fetched")
         output = row
                 
         
-        print("success")
+        #print("success")
         my_cursor.close()
 
         return output
@@ -41,9 +40,9 @@ def insert_request(query):
                                             passwd = password,
                                             database = datab, )
         my_cursor = connection.cursor()
-        print("connected")
+        #print("connected")
         my_cursor.execute(query)
-        print("query ausgeführt")
+        #print("query ausgeführt")
 
         if my_cursor.lastrowid:
             print('last insert id', my_cursor.lastrowid)
@@ -52,7 +51,7 @@ def insert_request(query):
             
         connection.commit()
                         
-        print("success")
+        #print("success")
         my_cursor.close()
 
 

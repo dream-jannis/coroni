@@ -30,8 +30,8 @@ def main():
             if user_password == passwd_req[0]:
                 session["logged_in"] = True
                 session["admin_logged_in"] = True
-                session["admin_username"] = "test"
-                session["username"] = "test"
+                session["admin_username"] = usern_req
+                session["username"] = usern_req
                 return redirect(url_for("index.main"))
             else:
                 return render_template("login.html")

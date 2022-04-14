@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request
 
 from helpers.decorator import login_required
 from helpers.dateparse import parse
-from db import select_request
+from db import insert_request, select_request
 
 t_appointments = Blueprint("t_appointments", __name__, template_folder="pages")
 
@@ -11,8 +11,8 @@ t_appointments = Blueprint("t_appointments", __name__, template_folder="pages")
 @login_required
 def main():
     #Daten aus DB abfragen
-    timestamp = query("SELECT datetime FROM test_appoints")#WHERE userid == session iwie sowas
-    result = query("SELECT result FROM test_appoints")
+    timestamp = select_request("SELECT datetime FROM test_appoints")#WHERE userid == session iwie sowas
+    result = select_request("SELECT result FROM test_appoints")
    
 
     data = ()
@@ -36,7 +36,7 @@ def main():
         testdate = request.form["date"]
         testtime = request.form["time"]
         testdt = (f"{testdate} {testtime}:00")
-        query(f"INSERT INTO test_appoints(datetime) VALUES('{testdt}')")
+        insert_request(f"INSERT INTO test_appoints(datetime) VALUES('{testdt}')")
     
         return render_template('t_appointments.html', 
             data = data,
