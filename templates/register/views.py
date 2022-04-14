@@ -2,7 +2,7 @@ import email
 from turtle import st
 from flask import render_template, request, session, Blueprint
 
-from db import select_request, insert_request
+from db import select_request, insert_request, update_request
 
 register = Blueprint("register", __name__, template_folder="pages")
 
@@ -26,8 +26,6 @@ def main():
         rec_count = request.form['anzahl_rec']
         last_rec = request.form['last_rec']
 
-        print()
-
         
         query = f"INSERT INTO vax_status(impf_count, rec_count, last_impf, last_rec) VALUES({impf_count}, {rec_count}, '{last_impf}', '{last_rec}');"
         print(query)
@@ -35,11 +33,17 @@ def main():
 
 
         query = f"INSERT INTO address(housenumber, street, plz, city, state, country) VALUES({housenumber}, '{street}', {plz}, '{city}', '{state}', '{country}');"
+        print(query)
         insert_request(query)
 
         query = f"INSERT INTO customers(surname, name, email, password, birthday) VALUES('{surname}', '{lastname}', '{mail}', '{password}', '{birthday}');"
         print(query)
         insert_request(query)
+
+        query = f"UPDATE customers, address SET customers.address_id = address.address_id WHERE customers.customer_id = address.address_id;"
+        update_request(query)
+        query = f"UPDATE customers, vax_status SET customers.status_id = vax_status.status_id WHERE customers.customer_id = vax_status.status_id;"
+        update_request(query)
         
 
         return render_template('login.html')
