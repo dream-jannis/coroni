@@ -21,7 +21,7 @@ def select_request(query):
         return output
 
     except mysql.connector.Error as error:
-        print("query request failed".format(error))
+        print("select request failed".format(error))
     
     finally:
         if connection.is_connected():
@@ -50,7 +50,7 @@ def insert_request(query):
 
 
     except mysql.connector.Error as error:
-        print("failed".format(error))
+        print("insert failed".format(error))
     
     finally:
         if connection.is_connected():
@@ -81,7 +81,7 @@ def select_request_all(query):
         return output
 
     except mysql.connector.Error as error:
-        print("failed".format(error))
+        print("all select failed".format(error))
     
     finally:
         if connection.is_connected():
@@ -101,7 +101,7 @@ def update_request(query):
 
     
     except mysql.connector.Error as error:
-        print("failed".format(error))
+        print("update failed".format(error))
     
     finally:
         if connection.is_connected():

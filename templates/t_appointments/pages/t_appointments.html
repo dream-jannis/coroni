@@ -10,13 +10,13 @@
 <table>
     <tr>
         <th>Zeitpunkt</th>
-        <!--<th>Testart</th>-->
+        <th>Testart</th>
         <th>Ergebniss</th>
     </tr>
     {% for time in data %}
     <tr>
         <td>{{time}}</td>
-        <!--<td>{{testtype}}</td>-->
+        <td>{{testtype}}</td>
         <td>{{result}}</td>
     </tr>
     {% endfor %}
@@ -27,6 +27,11 @@ Termin ausmachen:
 <form class="form1" method="POST">
     <input class="un " type="date" name="date" align="center" placeholder="Datum eintragen">
     <input class="pass" type="time" name="time" align="center" placeholder="Zeit eintragen">
+    <label for="testtype">Ihr gewünschter Test: </label>
+    <select name="testtype" id="testtype"> 
+        <option value="Schnelltest">Schnelltest</option>
+        <option value="PCR-Test">PCR-Test</option>
+        <option value="Antigentest">AntiGen-Test</option></select>
     <button type="submit" class="submit" align="center">Termin beantragen</button>      
 </form>
 {% endblock %}

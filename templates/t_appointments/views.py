@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, request,session
 
 from helpers.decorator import login_required
 from helpers.dateparse import parse
-from db import insert_request, select_request, select_request_all
+from db import insert_request, select_request, select_request_all, update_request
 
 t_appointments = Blueprint("t_appointments", __name__, template_folder="pages")
 
@@ -33,14 +33,21 @@ def main():
         testdt = (f"{testdate} {testtime}:00")
 
         #username holen
-        usern = session["username"]  
+        usern = session["username"]
 
-        print(usern)
+        #testart holen
+        testtype = request.form["testtype"]
+        print(testtype)  
+
         usern_to_id = select_request(f"SELECT customer_id FROM customers WHERE email = '{usern}';")
         usern_to_id = usern_to_id[0]
-        print(usern_to_id)
 
-        insert_request(f"INSERT INTO test_appoints(customer_id, datetime) VALUES('{usern_to_id}', '{testdt}')")
+        testtype_id = select_request(f"SELECT testtype_nr FROM test_type WHERE testmethod = '{testtype}' ")
+        testtype_id = testtype_id[0]
+        print(testtype_id)
+
+        insert_request(f"INSERT INTO test_appoints(customer_id, datetime, testtype_nr ) VALUES({usern_to_id}, '{testdt}', {testtype_id})")
+        #update_request(f"UPDATE test_appoints SET testtype_nr = {testtype_id} WHERE ")
     
         return render_template('t_appointments.html', 
             data = data,
