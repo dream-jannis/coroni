@@ -1,9 +1,6 @@
 from flask import Blueprint, render_template, url_for, redirect, request, session
-#from coronisecrets import hostname, username, password, datab
 from db import select_request
 
-
-from db import select_request
 
 login = Blueprint("login", __name__, template_folder="pages")
 
@@ -58,19 +55,4 @@ def logout():
     session.clear()
     return redirect(url_for("login.main"))
 
-
-#hardcoded login testuser
-    """
-    if usern == "test":
-        if user_password == "test":
-            session["logged_in"] = True
-            session["admin_logged_in"] = True
-            session["admin_username"] = "test"
-            session["username"] = "test"
-            return redirect(url_for("index.main"))
-        else:
-            return render_template("login.html")
-    else:
-        return render_template("login.html")
-    """
 

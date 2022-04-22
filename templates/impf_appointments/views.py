@@ -12,7 +12,6 @@ def main():
 
         impfdate = request.form["date"]
         impftime = request.form["time"]
-        #usern = request.form["username"]  #try getting username to get customer_id 
         impfdt = (f"{impfdate} {impftime}:00")
         usern = session["username"]  
 

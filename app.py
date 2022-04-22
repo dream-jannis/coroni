@@ -6,6 +6,7 @@ from templates.register.views import register
 from templates.profil.views import profil
 from templates.impf_appointments.views import impf_appointments
 from templates.t_appointments.views import t_appointments
+from templates.admin.views import admin
 
 app = Flask(__name__)
 
@@ -17,6 +18,7 @@ app.register_blueprint(register, url_prefix="/register")
 app.register_blueprint(profil, url_prefix="/profil")
 app.register_blueprint(impf_appointments, url_prefix="/impf_appointments")
 app.register_blueprint(t_appointments, url_prefix="/t_appointments")
+app.register_blueprint(admin, url_prefix="/admin")
 
 @app.errorhandler(Exception)
 def server_error(err):
