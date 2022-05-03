@@ -18,10 +18,9 @@ def main():
 
     data = []
     data.append(all_users)
-    print("Data: ",data,"\n")
+    #print("Data: ",data,"\n")
     print("Data 0 ",data[0],"\n")
-    print("Data 0 0 ",data[0][0],"\n")
-    #for row in all_users:
-    #    data.append(str(all_users))
+    #print("Data 0 0 ",data[0][0],"\n")
+ 
         
     return render_template("admin.html", data=data,)

@@ -8,31 +8,49 @@
 <h2>Alle User:</h2>
 
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Vorname</th>
-        <th>Nachname</th>
-        <th>EMail</th>
-    </tr>
-    {% for time in data %}
-    <tr>
-        <td>{{data[0][0][0]}}</td>
-        <td>{{data[0][0][1]}}</td>
-        <td>{{data[0][0][2]}}</td>
-        <td>{{data[0][0][3]}}</td>
-    </tr>
-    {% endfor %}
 
-</table>
-<thead>
-    <tr>
-        <th> ID</th>
-        <th>Vorname </th>
-        <th>Nachname </th>
-        <th>Email </th>
-    </tr>
-</thead>
+
+        <div class="container">
+            <div class="row py-5">
+              <div class="col-12">
+                <table id="example" class="table table-hover responsive nowrap" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th>Client Name</th>
+                      <th>Phone Number</th>
+                      <th>Profession</th>
+                      <th>Date of Birth</th>
+                      <th>App Access</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                    {% for time in data %}
+                      <td>
+                        <a href="#">
+                          <div class="d-flex align-items-center">
+                            <div class="avatar avatar-blue mr-3">EB</div>
+                            
+                            <div class="">
+                              <p class="font-weight-bold mb-0">{{data[0][0][0]}}</p>
+                              <p class="text-muted mb-0">{{data[0][0][1]}}</p>
+                            </div>
+                          </div>
+                        </a>
+                      </td>
+                      <td>(784) 667 8768</td>
+                      <td>Designer</td>
+                      <td>09/04/1996</td>
+                      <td>
+                        <div class="badge badge-success badge-success-alt">Enabled</div>
+                      </td>
+                      {% end for %}
+                    </tr>
+                </tbody>
+             </div>
+            </div>
+        </div>
 <tbody>
     
     
