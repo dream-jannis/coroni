@@ -2,15 +2,24 @@ from logging import root
 import mysql.connector
 
 
-from coronisecrets import hostname, username, password, datab
+#from coronisecrets import hostname, username, password, datab
+
+
+hostname = "localhost"
+username = "root"
+password = "password"
+datab = "coronacentre"
 
 #SELECT ONE ROW OF DATA
 def select_request(query):
     try:
-        connection = mysql.connector.connect(host = hostname,
-                                            user = username,
-                                            passwd = password,
-                                            database = datab, )
+        connection = mysql.connector.connect(
+            host = hostname,
+            user = username,
+            passwd = password,
+            database = datab, 
+        )
+        
         my_cursor = connection.cursor()
         my_cursor.execute(query)
         row = my_cursor.fetchone()
@@ -32,10 +41,13 @@ def select_request(query):
 #INSERT DATA IN TABLE
 def insert_request(query):
     try:
-        connection = mysql.connector.connect(host = hostname,
-                                            user = username,
-                                            passwd = password,
-                                            database = datab, )
+        connection = mysql.connector.connect(
+            host = hostname,
+            user = username,
+            passwd = password,
+            database = datab, 
+        )
+
         my_cursor = connection.cursor()
         my_cursor.execute(query)
 
@@ -61,10 +73,13 @@ def insert_request(query):
 #SELECT ALL VALUES THAT HIT
 def select_request_all(query):
     try:
-        connection = mysql.connector.connect(host = hostname,
-                                            user = username,
-                                            passwd = password,
-                                            database = datab, )
+        connection = mysql.connector.connect(
+            host = hostname,
+            user = username,
+            passwd = password,
+            database = datab, 
+        )
+
         my_cursor = connection.cursor()
         print("connected")
         my_cursor.execute(query)
@@ -91,10 +106,13 @@ def select_request_all(query):
 #UPDATE TABLE
 def update_request(query):
     try:
-        connection = mysql.connector.connect(host = hostname,
-                                            user = username,
-                                            passwd = password,
-                                            database = datab, )
+        connection = mysql.connector.connect(
+            host = hostname,
+            user = username,
+            passwd = password,
+            database = datab, 
+        )
+
         my_cursor = connection.cursor()
         my_cursor.execute(query)
         connection.commit()

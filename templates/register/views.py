@@ -36,13 +36,13 @@ def main():
         print(query)
         insert_request(query)
 
-        query = f"INSERT INTO customers(surname, name, email, password, birthday) VALUES('{surname}', '{lastname}', '{mail}', '{password}', '{birthday}');"
+        query = f"INSERT INTO user(surname, name, email, password, birthday) VALUES('{surname}', '{lastname}', '{mail}', '{password}', '{birthday}');"
         print(query)
         insert_request(query)
 
-        query = f"UPDATE customers, address SET customers.address_id = address.address_id WHERE customers.customer_id = address.address_id;"
+        query = f"UPDATE user, address SET user.address_id = address.address_id WHERE user.user_id = address.address_id;"
         update_request(query)
-        query = f"UPDATE customers, vax_status SET customers.status_id = vax_status.status_id WHERE customers.customer_id = vax_status.status_id;"
+        query = f"UPDATE user, vax_status SET user.status_id = vax_status.status_id WHERE user.user_id = vax_status.status_id;"
         update_request(query)
         
 

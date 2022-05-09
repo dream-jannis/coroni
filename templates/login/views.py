@@ -16,9 +16,9 @@ def main():
         usern = request.form["login"]
         user_password = request.form["password"]
 
-        query = f"SELECT email FROM customers WHERE email = '{usern}'"
+        query = f"SELECT email FROM user WHERE email = '{usern}'"
         usern_req = select_request(query)
-        query = f"SELECT password FROM customers WHERE password = '{user_password}'"
+        query = f"SELECT password FROM user WHERE password = '{user_password}'"
         passwd_req = select_request(query)
 
         if not usern or not user_password:
