@@ -21,23 +21,30 @@ def main():
         query = f"SELECT password FROM user WHERE password = '{user_password}'"
         passwd_req = select_request(query)
 
+        query = f"SELECT is_admin FROM user WHERE email = '{usern}'"
+        is_admin = select_request(query)
+        is_admin = is_admin[0]
+
         if not usern or not user_password:
             return render_template("login.html")
 
-        if usern == "admin":
-            if user_password == "admin":
-                session["logged_in"] = True
-                session["admin_logged_in"] = True
-                session["admin_username"] = "admin"
-                session["username"] = "admin"
-                return redirect(url_for("index.main"))
+        #if usern == "admin":
+        #    if user_password == "admin":
+        #        session["logged_in"] = True
+        #        session["admin_logged_in"] = True
+        #        session["admin_username"] = "admin"
+        #        session["username"] = "admin"
+        #        return redirect(url_for("index.main"))
 
         elif usern == usern_req[0]:
             if user_password == passwd_req[0]:
                 session["logged_in"] = True
-                session["admin_logged_in"] = True
                 session["admin_username"] = request.form["login"]
                 session["username"] = request.form["login"]
+                if is_admin == 1:
+                    session["admin_logged_in"] = True
+                else:
+                    session["admin_logged_in"] = False
                 return redirect(url_for("index.main"))
             else:
                 return render_template("login.html")
@@ -54,5 +61,3 @@ def main():
 def logout():
     session.clear()
     return redirect(url_for("login.main"))
-
-

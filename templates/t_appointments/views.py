@@ -11,21 +11,52 @@ t_appointments = Blueprint("t_appointments", __name__, template_folder="pages")
 @t_appointments.route('/', methods=("POST","GET"))
 @login_required
 def main():
-    #Daten aus DB abfragen
-    timestamp = select_request_all("SELECT datetime FROM test_appoints")#WHERE userid == session iwie sowas
-    result = select_request_all("SELECT result FROM test_appoints")
-   
+    #username holen
+    def get_test():
+        usern = session["username"]
+        usern_to_id = select_request(f"SELECT user_id FROM user WHERE email = '{usern}';")
+        usern_to_id = usern_to_id[0]
+        
+        timestamp = select_request_all(f"SELECT datetime FROM test_appoints WHERE user_id='{usern_to_id}';")
+        result = select_request_all(f"SELECT result FROM test_appoints WHERE user_id='{usern_to_id}';")
+        testtypenr = select_request_all(f"SELECT testtype_nr FROM test_appoints WHERE user_id='{usern_to_id}';")    
 
-    data = []
-    i = 0
+        data = []
+        empty_list = []
+        i = 0
 
-    for row in timestamp:
-        timestamprow = parse(row)
-        data.append(str(timestamprow))
-        data.append(str(result[i]))
-        i = i + 1
+        for row in timestamp:
+            timestamprow = parse(row)
+            empty_list.append(str(timestamprow))
+            tstnr = str(testtypenr[i])
+            tstnr = tstnr.replace("(","")
+            tstnr = tstnr.replace(")","")
+            tstnr = tstnr.replace(",","")
+            if tstnr == "1":
+                tstnr = "Schnelltest"
+            elif tstnr == "2":
+                tstnr = "PCR-Test"
+            elif tstnr == "3": 
+                tstnr = "AntiGen-Test"
+            empty_list.append(tstnr)
+
+            rslt = str(result[i])
+            rslt = rslt.replace("(","")
+            rslt = rslt.replace(")","")
+            rslt = rslt.replace(",","")
+            if rslt == "None":
+                rslt = "Ergebnis noch nicht verfügbar"
+            empty_list.append(rslt)
+
+            data.append(empty_list)
+            empty_list = []
+            i = i + 1
+
+        return data
     
-
+    data = get_test()
+    is_admin = session["admin_logged_in"]
+    
     if request.method == "POST":
         #Daten in DB eintragen
         testdate = request.form["date"]
@@ -33,27 +64,23 @@ def main():
         testtype = request.form["testtype"]
         testdt = (f"{testdate} {testtime}:00")
 
-        #username holen
-        usern = session["username"]
-        print("usern ",usern)
-
-        usern_to_id = select_request(f"SELECT user_id FROM user WHERE email = '{usern}';")
-        usern_to_id = usern_to_id[0]
-        print("usern_to_id ",usern_to_id)
-        print("testtype ",testtype)
+    
         testtype_id = select_request(f"SELECT testtype_nr FROM test_type WHERE testmethod = '{testtype}' ")
         testtype_id = testtype_id[0]
-        data.append(str(testtype_id))
-        print("testtype_id ",testtype_id)
-        print(f"INSERT INTO test_appoints(user_id, datetime, testtype_nr ) VALUES({usern_to_id}, '{testdt}', {testtype_id})")
+        
+        usern = session["username"]
+        usern_to_id = select_request(f"SELECT user_id FROM user WHERE email = '{usern}';")
+        usern_to_id = usern_to_id[0]
         insert_request(f"INSERT INTO test_appoints(user_id, datetime, testtype_nr ) VALUES({usern_to_id}, '{testdt}', {testtype_id})")
         #update_request(f"UPDATE test_appoints SET testtype_nr = {testtype_id} WHERE ")
-        print(data)
+        data = get_test()
         return render_template('t_appointments.html', 
             data = data,
+            is_admin = is_admin
         )
 
     else:
         return render_template('t_appointments.html',
-            data = data, 
+            data = data,
+            is_admin = is_admin
         )

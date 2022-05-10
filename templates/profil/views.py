@@ -7,5 +7,10 @@ profil = Blueprint("profil", __name__, template_folder="pages")
 @profil.route('')
 @login_required
 def main():
-    return render_template('profil.html')
+    is_admin = session["admin_logged_in"]
+    data = session["username"]
+    return render_template('profil.html',
+        is_admin = is_admin,
+        data = data
+    )
 

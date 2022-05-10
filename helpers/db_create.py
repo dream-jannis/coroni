@@ -131,6 +131,57 @@ def create_database():
             "AntiGen-Test", '30'
         )
     """)
+    my_cursor.execute("""
+        INSERT INTO vaccination(
+            vaccine
+        ) VALUES (
+            "BioNTech"
+        )
+    """)
+    my_cursor.execute("""
+        INSERT INTO vaccination(
+            vaccine
+        ) VALUES (
+            "AstraZeneca"
+        )
+    """)
+    my_cursor.execute("""
+        INSERT INTO vaccination(
+            vaccine
+        ) VALUES (
+            "Moderna"
+        )
+    """)
+    my_cursor.execute("""
+        INSERT INTO vaccination(
+            vaccine
+        ) VALUES (
+            "NovoVax"
+        )
+    """)
+    my_cursor.execute("""
+        INSERT INTO vax_status(
+            impf_count, rec_count, last_impf, last_rec
+            ) VALUES (
+                0, 0, '2022-05-10', '2022-05-10'
+            );
+    """)
+    my_cursor.execute("""
+        INSERT INTO address(
+            housenumber, street, plz, city, state, country
+            ) VALUES (
+            0, 'admin', 0, 'admin', 'admin', 'admin'
+            );
+    """)
+    my_cursor.execute("""
+        INSERT INTO user(
+            surname, name, email, password, is_admin
+            ) VALUES (
+            "admin", "admin", "admin", "admin", True
+            );
+    """)
+
+
     mydb.commit()
 
     print("Datenbank wurde erstellt.")

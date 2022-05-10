@@ -12,15 +12,15 @@ def login_required(f):
     return decorated_function
 
 
-def admin_required(func):
-    """
-    Modified login_required decorator to restrict access to admin group.
-    """
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        print(session["admin_logged_in"])
+        print(type(session["admin_logged_in"]))
+        print(session["logged_in"] )
+        print(session["username"] )
+        if "logged_in" not in session and "username" not in session and session["admin_logged_in"] == False:
+            return redirect(url_for("login.main", next=request.url))
+        return f(*args, **kwargs)
 
-    @wraps(func)
-    def decorated_view(*args, **kwargs):
-        if current_user.group != 0:        # zero means admin, one and up are other groups
-            flash("You don't have permission to access this resource.", "warning")
-            return redirect(url_for("main.home"))
-        return func(*args, **kwargs)
-    return decorated_view
+    return decorated_function

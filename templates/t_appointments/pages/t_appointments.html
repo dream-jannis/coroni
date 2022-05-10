@@ -1,27 +1,10 @@
 {% extends "base.html" %}
 {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='terminestyle.css') }}">
 {% endblock %}
 {% block main %}
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<p>!Du kannst keine Termine in der Vergangenheit oder zuweit in der Zukunft ausmachen -- MySQL hat da auch iwie nen Problem mit!</p>
-<h2>Deine Termine:</h2>
-<h1>{{timestamp}}</h1>
-<table>
-    <tr>
-        <th>Zeitpunkt</th>
-        <th>Testart</th>
-        <th>Ergebniss</th>
-    </tr>
-    {% for time in data %}
-    <tr>
-        <td>{{time}}</td>
-        <td>{{testtype}}</td>
-        <td>{{result}}</td>
-    </tr>
-    {% endfor %}
-
-</table>
 
 Termin ausmachen:
 <form class="form1" method="POST">
@@ -34,4 +17,24 @@ Termin ausmachen:
         <option value="AntiGen-Test">AntiGen-Test</option></select>
     <button type="submit" class="submit" align="center">Termin beantragen</button>      
 </form>
+
+<p>!Du kannst keine Termine in der Vergangenheit oder zuweit in der Zukunft ausmachen -- MySQL hat da auch iwie nen Problem mit!</p>
+<h2>Deine Termine:</h2>
+<table>
+    <tr>
+        <th>Zeitpunkt</th>
+        <th>Testart</th>
+        <th>Ergebniss</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+        <td>{{item[0]}}</td>
+        <td>{{item[1]}}</td>
+        <td>{{item[2]}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+
 {% endblock %}

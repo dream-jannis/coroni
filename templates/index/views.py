@@ -7,4 +7,7 @@ index = Blueprint("index", __name__, template_folder="pages")
 @index.route('')
 @login_required
 def main():
-    return render_template('index.html')
+    is_admin = session["admin_logged_in"]
+    return render_template('index.html',
+        is_admin = is_admin
+    )

@@ -1,6 +1,7 @@
 import email
+from os import urandom
 from turtle import st
-from flask import render_template, request, session, Blueprint
+from flask import redirect, render_template, request, session, Blueprint, url_for
 
 from db import select_request, insert_request, update_request
 
@@ -45,7 +46,6 @@ def main():
         query = f"UPDATE user, vax_status SET user.status_id = vax_status.status_id WHERE user.user_id = vax_status.status_id;"
         update_request(query)
         
-
-        return render_template('login.html')
-
+        return redirect(url_for('/login'))
+        
     return render_template('register.html')
