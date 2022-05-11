@@ -73,7 +73,7 @@ form.form1 {
     cursor: pointer;
     border-radius: 5em;
     color: #fff;
-    background: linear-gradient(to right, #67db9b, #67f56e);
+    background: #67db9b;
     border: 0;
     padding-left: 40px;
     padding-right: 40px;
@@ -91,7 +91,7 @@ form.form1 {
     cursor: pointer;
     border-radius: 5em;
     color: #fff;
-    background: linear-gradient(to right, #67db9b, #67f56e);
+    background: #67db9b;
     border: 0;
     padding-left: 40px;
     padding-right: 40px;

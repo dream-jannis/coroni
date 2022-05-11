@@ -20,9 +20,9 @@ app.register_blueprint(impf_appointments, url_prefix="/impf_appointments")
 app.register_blueprint(t_appointments, url_prefix="/t_appointments")
 app.register_blueprint(admin, url_prefix="/admin")
 
-#@app.errorhandler(Exception)
-#def server_error(err):
-#    return redirect(url_for("index.main"))
+@app.errorhandler(Exception)
+def server_error(err):
+    return redirect(url_for("index.main"))
 
 if __name__ == "__main__":
     app.run('localhost', debug=True, use_reloader=True)
