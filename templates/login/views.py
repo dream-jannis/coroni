@@ -28,19 +28,14 @@ def main():
         if not usern or not user_password:
             return render_template("login.html")
 
-        #if usern == "admin":
-        #    if user_password == "admin":
-        #        session["logged_in"] = True
-        #        session["admin_logged_in"] = True
-        #        session["admin_username"] = "admin"
-        #        session["username"] = "admin"
-        #        return redirect(url_for("index.main"))
-
         elif usern == usern_req[0]:
             if user_password == passwd_req[0]:
                 session["logged_in"] = True
                 session["admin_username"] = request.form["login"]
                 session["username"] = request.form["login"]
+                usern_to_id = select_request(f"SELECT user_id FROM user WHERE email = '{usern}';")
+                usern_to_id = usern_to_id[0]
+                session["id"] = usern_to_id
                 if is_admin == 1:
                     session["admin_logged_in"] = True
                 else:

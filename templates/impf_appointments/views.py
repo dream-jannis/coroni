@@ -13,12 +13,9 @@ impf_appointments = Blueprint("impf_appointments", __name__, template_folder="pa
 def main():
     #username holen
     def get_impf():
-        usern = session["username"]
-        usern_to_id = select_request(f"SELECT user_id FROM user WHERE email = '{usern}';")
-        usern_to_id = usern_to_id[0]
-        
-        timestamp = select_request_all(f"SELECT datetime FROM vax_appoints WHERE user_id='{usern_to_id}';")
-        impfnr = select_request_all(f"SELECT impf_id FROM vax_appoints WHERE user_id='{usern_to_id}';")    
+
+        timestamp = select_request_all(f"SELECT datetime FROM vax_appoints WHERE user_id='{session['id']}';")
+        impfnr = select_request_all(f"SELECT impf_id FROM vax_appoints WHERE user_id='{session['id']}';")    
 
         data = []
         empty_list = []
@@ -60,10 +57,7 @@ def main():
         vaccine_id = select_request(f"SELECT impf_id FROM vaccination WHERE vaccine = '{vaccine}' ")
         vaccine_id = vaccine_id[0]
 
-        usern = session["username"]
-        usern_to_id = select_request(f"SELECT user_id FROM user WHERE email = '{usern}';")
-        usern_to_id = usern_to_id[0]
-        insert_request(f"INSERT INTO vax_appoints(user_id, datetime, impf_id ) VALUES({usern_to_id}, '{impfdt}', {vaccine_id})")
+        insert_request(f"INSERT INTO vax_appoints(user_id, datetime, impf_id ) VALUES({session['id']}, '{impfdt}', {vaccine_id})")
         #update_request(f"UPDATE test_appoints SET testtype_nr = {testtype_id} WHERE ")
         data = get_impf()
 

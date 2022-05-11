@@ -15,11 +15,7 @@ def login_required(f):
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        print(session["admin_logged_in"])
-        print(type(session["admin_logged_in"]))
-        print(session["logged_in"] )
-        print(session["username"] )
-        if "logged_in" not in session and "username" not in session and session["admin_logged_in"] == False:
+        if "logged_in" not in session and "username" not in session or session["admin_logged_in"] == False:
             return redirect(url_for("login.main", next=request.url))
         return f(*args, **kwargs)
 

@@ -13,13 +13,10 @@ t_appointments = Blueprint("t_appointments", __name__, template_folder="pages")
 def main():
     #username holen
     def get_test():
-        usern = session["username"]
-        usern_to_id = select_request(f"SELECT user_id FROM user WHERE email = '{usern}';")
-        usern_to_id = usern_to_id[0]
-        
-        timestamp = select_request_all(f"SELECT datetime FROM test_appoints WHERE user_id='{usern_to_id}';")
-        result = select_request_all(f"SELECT result FROM test_appoints WHERE user_id='{usern_to_id}';")
-        testtypenr = select_request_all(f"SELECT testtype_nr FROM test_appoints WHERE user_id='{usern_to_id}';")    
+
+        timestamp = select_request_all(f"SELECT datetime FROM test_appoints WHERE user_id='{session['id']}';")
+        result = select_request_all(f"SELECT result FROM test_appoints WHERE user_id='{session['id']}';")
+        testtypenr = select_request_all(f"SELECT testtype_nr FROM test_appoints WHERE user_id='{session['id']}';")    
 
         data = []
         empty_list = []
@@ -68,10 +65,7 @@ def main():
         testtype_id = select_request(f"SELECT testtype_nr FROM test_type WHERE testmethod = '{testtype}' ")
         testtype_id = testtype_id[0]
         
-        usern = session["username"]
-        usern_to_id = select_request(f"SELECT user_id FROM user WHERE email = '{usern}';")
-        usern_to_id = usern_to_id[0]
-        insert_request(f"INSERT INTO test_appoints(user_id, datetime, testtype_nr ) VALUES({usern_to_id}, '{testdt}', {testtype_id})")
+        insert_request(f"INSERT INTO test_appoints(user_id, datetime, testtype_nr ) VALUES({session['id']}, '{testdt}', {testtype_id})")
         #update_request(f"UPDATE test_appoints SET testtype_nr = {testtype_id} WHERE ")
         data = get_test()
         return render_template('t_appointments.html', 

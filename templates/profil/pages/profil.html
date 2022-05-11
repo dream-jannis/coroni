@@ -1,9 +1,58 @@
 {% extends "base.html" %}
 {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='profilstyle.css')}}">
 {% endblock %}
 {% block main %}
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<h1>{{data}}</h1>
-profil
+<p>&nbsp;</p>
+<h1>Hallo {{data[1]}}</h1>
+<h3>Deine Daten:</h3>
+<div class="data">
+    <form class="form1" method="POST">
+        <input class="un " type="email" name="email" align="center" placeholder="E-Mail" value={{data[3]}}>
+        <input class="un" type="password" name="password" align="center" placeholder="Password" value={{data[4]}}>
+        <input class="un" type="text" name="surname" align="center" placeholder="Vorname" value={{data[1]}}>
+        <input class="un" type="text" name="name" align="center" placeholder="Nachname" value={{data[2]}}>
+        <input class="un" type="date" name="birthday" align="center" placeholder="Geburstag" value={{data[5]}}>
+        <p>&nbsp;</p>
+        <p>Anschrift:</p>  
+        <p>&nbsp;</p>
+        <input class="un" type="street" name="street" align="center" placeholder="Straße" value={{data[11]}}>
+        <input class="un" type="number" name="number" align="center" placeholder="Hausnummer" value={{data[10]}}>
+        <input class="un" type="number" name="plz" align="center" placeholder="Postleitzahl" value={{data[12]}}>
+        <input class="un" type="text" name="city" align="center" placeholder="Wohnort/ Stadt" value={{data[13]}}>
+        <input class="un" type="text" name="state" align="center" placeholder="Bundesland" value={{data[14]}}>
+        <input class="un" type="text" name="country" align="center" placeholder="Land" value={{data[15]}}>
+        <p>&nbsp;</p>
+        <p>
+        Angaben zu vorherigen Impfungen:
+        Bist du geimpft:
+        
+        Wie oft wurdest du geimpft:
+        </p>
+        <p>&nbsp;</p>
+        <input class="un" type="number" name="anzahl_impf" align="center" placeholder="0" value={{data[17]}}>
+        <p>&nbsp;</p>
+        <p>Last Impf??</p>
+        <p>&nbsp;</p>
+        <input class="un" type="date" name="last_impf" align="center" placeholder="gestern" value={{data[19]}}>
+        <p>&nbsp;</p>
+        <p>   
+        Bist du genesen?
+        Wie oft bist du genesen?
+        </p>
+        <p>&nbsp;</p>
+        <input class="un" type="number" name="anzahl_rec" align="center" placeholder="2" value={{data[18]}}>
+        <p>&nbsp;</p>
+        <p>
+        Last RECC??
+        </p>
+        <p>&nbsp;</p>
+        <input class="un" type="date" name="last_rec" align="center" placeholder="gestern" value={{data[20]}}>
+        <p>&nbsp;</p>
+        <button type="submit" class="submit" align="center">Fertig</button>    
+        <p>&nbsp;</p> 
+    </form>
+</div>
 {% endblock %}
