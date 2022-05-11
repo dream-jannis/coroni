@@ -7,25 +7,29 @@ from db import insert_request, select_request, select_request_all, update_reques
 
 admin = Blueprint("admin", __name__, template_folder="pages")
 
-@admin.route('/', methods=("POST","GET"))
+@admin.route('/users', methods=("POST","GET"))
 @admin_required
 def main():
     is_admin = session["admin_logged_in"]
-    query = f"SELECT * FROM user LEFT JOIN address ON user.address_id = address.address_id LEFT JOIN vax_status ON user.status_id = vax_status.status_id"
-    all_users = select_request_all(query)
-    print(type(all_users))
-    print(all_users[0][5])
-    #test = parse(all_users[0][5])
-    #print(test)
+    query = f"SELECT * FROM user LEFT JOIN address ON user.address_id = address.address_id LEFT JOIN vax_status ON user.status_id = vax_status.status_id;"
+    data = select_request_all(query)
+    print(type(data))
+    print(data)
+    
+    return render_template("admin.html", 
+        data=data,
+        is_admin = is_admin
+    )
 
-    data = []
-    data.append(all_users)
-    print("Data: ",data,"\n")
-    print("Data 0 ",data[0],"\n")
-    print("Data 0 0 ",data[0][0],"\n")
-    #for row in all_users:
-    #    data.append(str(all_users))
-        
+@admin.route('/appointments', methods=("POST","GET"))
+@admin_required
+def appointments():
+    is_admin = session["admin_logged_in"]
+    query = f"SELECT * FROM user LEFT JOIN address ON user.address_id = address.address_id LEFT JOIN vax_status ON user.status_id = vax_status.status_id;"
+    data = select_request_all(query)
+    print(type(data))
+    print(data)
+    
     return render_template("admin.html", 
         data=data,
         is_admin = is_admin

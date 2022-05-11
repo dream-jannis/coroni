@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='adminstyle.css') }}">
 {% endblock %}
 {% block main %}
 <p>&nbsp;</p>
@@ -15,12 +16,12 @@
         <th>Nachname</th>
         <th>EMail</th>
     </tr>
-    {% for time in data %}
+    {% for list in data %}
     <tr>
-        <td>{{data[0][0][0]}}</td>
-        <td>{{data[0][0][1]}}</td>
-        <td>{{data[0][0][2]}}</td>
-        <td>{{data[0][0][3]}}</td>
+        <td>{{list[0]}}</td>
+        <td>{{list[1]}}</td>
+        <td>{{list[2]}}</td>
+        <td>{{list[3]}}</td>
     </tr>
     {% endfor %}
 
