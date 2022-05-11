@@ -1,6 +1,6 @@
 import re
 from unittest import TestCase
-from flask import Blueprint, render_template, request,session
+from flask import Blueprint, redirect, render_template, request,session, url_for
 
 from helpers.decorator import login_required
 from helpers.dateparse import parse
@@ -17,6 +17,7 @@ def main():
         timestamp = select_request_all(f"SELECT datetime FROM test_appoints WHERE user_id='{session['id']}';")
         result = select_request_all(f"SELECT result FROM test_appoints WHERE user_id='{session['id']}';")
         testtypenr = select_request_all(f"SELECT testtype_nr FROM test_appoints WHERE user_id='{session['id']}';")    
+        appoints_id = select_request_all(f"SELECT appoints_id FROM test_appoints WHERE user_id='{session['id']}';") 
 
         data = []
         empty_list = []
@@ -44,6 +45,9 @@ def main():
             if rslt == "None":
                 rslt = "Ergebnis noch nicht verfügbar"
             empty_list.append(rslt)
+            
+            a_id = str(appoints_id[i])
+            empty_list.append(a_id)
 
             data.append(empty_list)
             empty_list = []
@@ -78,3 +82,13 @@ def main():
             data = data,
             is_admin = is_admin
         )
+
+@t_appointments.route('/update/<id>/', methods=("POST","GET"))
+@login_required
+def update(id):
+    id = id.replace("(","").replace(")","").replace(",","")
+
+    query = f"DELETE FROM test_appoints WHERE appoints_id={id} AND user_id={session['id']}"
+    update_request(query)
+
+    return redirect('/t_appointments')

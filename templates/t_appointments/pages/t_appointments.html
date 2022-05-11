@@ -25,12 +25,14 @@ Termin ausmachen:
         <th>Zeitpunkt</th>
         <th>Testart</th>
         <th>Ergebniss</th>
+        <th>Aktion</th>
     </tr>
     {% for item in data %}
     <tr>
         <td>{{item[0]}}</td>
         <td>{{item[1]}}</td>
         <td>{{item[2]}}</td>
+        <td><a href="/t_appointments/update/{{item[3]}}" class="action">Termin löschen</a></td>
     </tr>
     {% endfor %}
 
