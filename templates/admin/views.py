@@ -13,8 +13,7 @@ def main():
     is_admin = session["admin_logged_in"]
     query = f"SELECT * FROM user LEFT JOIN address ON user.address_id = address.address_id LEFT JOIN vax_status ON user.status_id = vax_status.status_id;"
     data = select_request_all(query)
-    print(type(data))
-    print(data)
+
     
     return render_template("admin.html", 
         data=data,
@@ -25,12 +24,11 @@ def main():
 @admin_required
 def appointments():
     is_admin = session["admin_logged_in"]
-    query = f"SELECT * FROM user LEFT JOIN address ON user.address_id = address.address_id LEFT JOIN vax_status ON user.status_id = vax_status.status_id;"
+    query = f"select datetime, testmethod, result, surname, name, email from test_appoints JOIN user on test_appoints.user_id=user.user_id JOIN test_type ON test_appoints.testtype_nr=test_type.testtype_nr WHERE result is null;"
     data = select_request_all(query)
-    print(type(data))
-    print(data)
+
     
-    return render_template("admin.html", 
+    return render_template("appoints.html", 
         data=data,
         is_admin = is_admin
     )

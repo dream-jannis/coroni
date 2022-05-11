@@ -1,9 +1,9 @@
 body {
-    background: #eee;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    font-family: 'Open Sans', sans-serif; 
+  background: #eee;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: Avenir;
 }
   
 .container {
@@ -43,7 +43,8 @@ nav.scrollUp {
 nav ul.navbar-menu {
   margin: 0;
   padding: 0;
-  display: inline-block;
+  /*display: inline-block;*/
+  display: block;
   float: right; 
 }
 
@@ -70,8 +71,9 @@ nav button {
   height: 40px;
   margin-top: 20px;
   border: none;
+  /*display: inline-block;*/
+  display: block;
   float: right;
-  display: inline-block;
   cursor: pointer;
   display: none; 
 }
