@@ -5,23 +5,27 @@
 {% block main %}
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<h2>Alle Nutzer:</h2>
+<h2>Alle Test-Termine:</h2>
 
 
 <table>
     <tr>
-        <th>ID</th>
-        <th>Vorname</th>
         <th>Nachname</th>
+        <th>Vorname</th>
         <th>E-Mail</th>
+        <th>Testdatum</th>
+        <th>Testart</th>
+        <th>Ergebnis</th>
         <th>Aktion</th>
     </tr>
     {% for list in data %}
     <tr>
+        <td>{{list[4]}}</td>
+        <td>{{list[3]}}</td>
+        <td>{{list[5]}}</td>
         <td>{{list[0]}}</td>
         <td>{{list[1]}}</td>
         <td>{{list[2]}}</td>
-        <td>{{list[3]}}</td>
         <td><a href="">sus</a></td>
     </tr>
     {% endfor %}

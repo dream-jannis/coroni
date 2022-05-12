@@ -20,15 +20,30 @@ def main():
         is_admin = is_admin
     )
 
-@admin.route('/appointments', methods=("POST","GET"))
+@admin.route('/appointments/impf', methods=("POST","GET"))
 @admin_required
-def appointments():
+def appointments_impf():
     is_admin = session["admin_logged_in"]
-    query = f"select datetime, testmethod, result, surname, name, email from test_appoints JOIN user on test_appoints.user_id=user.user_id JOIN test_type ON test_appoints.testtype_nr=test_type.testtype_nr WHERE result is null;"
+    query = f"select datetime, vaccine, surname, name, email from vax_appoints JOIN user on vax_appoints.user_id=user.user_id JOIN vaccination ON vaccination.impf_id=vaccination.impf_id;"
     data = select_request_all(query)
 
+  
     
-    return render_template("appoints.html", 
+    return render_template("appoints_impf.html", 
+        data=data,
+        is_admin = is_admin
+    )
+
+@admin.route('/appointments/test', methods=("POST","GET"))
+@admin_required
+def appointments_test():
+    is_admin = session["admin_logged_in"]
+    query = f"select datetime, testmethod, result, surname, name, email from test_appoints JOIN user on test_appoints.user_id=user.user_id JOIN test_type ON test_appoints.testtype_nr=test_type.testtype_nr;"
+    data = select_request_all(query)
+
+    #query = f"select datetime, testmethod, result, surname, name, email from test_appoints JOIN user on test_appoints.user_id=user.user_id JOIN test_type ON test_appoints.testtype_nr=test_type.testtype_nr WHERE result is null;"
+       
+    return render_template("appoints_test.html", 
         data=data,
         is_admin = is_admin
     )
