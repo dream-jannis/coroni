@@ -39,11 +39,9 @@ def main():
             empty_list.append(tstnr)
 
             rslt = str(result[i])
-            rslt = rslt.replace("(","")
-            rslt = rslt.replace(")","")
-            rslt = rslt.replace(",","")
-            if rslt == "None":
+            if "None" in rslt:
                 rslt = "Ergebnis noch nicht verfügbar"
+                
             empty_list.append(rslt)
             
             a_id = str(appoints_id[i])

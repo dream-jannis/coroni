@@ -5,22 +5,23 @@
 {% block main %}
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+<p>&nbsp;</p>
 
-Termin ausmachen:
+<h2>Termin ausmachen:</h2>
 <form class="form1" method="POST">
     <input class="un " type="date" name="date" align="center" placeholder="Datum eintragen">
     <input class="pass" type="time" name="time" align="center" placeholder="Zeit eintragen">
     <label for="testtype">Ihr gewünschter Test: </label>
-    <select name="testtype" id="testtype"> 
+    <select class="un" name="testtype" id="testtype"> 
         <option value="Schnelltest">Schnelltest</option>
         <option value="PCR-Test">PCR-Test</option>
         <option value="AntiGen-Test">AntiGen-Test</option></select>
+        <p></p>
     <button type="submit" class="submit" align="center">Termin beantragen</button>      
 </form>
 
-<p>!Du kannst keine Termine in der Vergangenheit oder zuweit in der Zukunft ausmachen -- MySQL hat da auch iwie nen Problem mit!</p>
 <h2>Deine Termine:</h2>
-<table>
+<table> 
     <tr>
         <th>Zeitpunkt</th>
         <th>Testart</th>

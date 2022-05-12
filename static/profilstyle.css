@@ -38,7 +38,13 @@ body {
     margin-bottom: 50px;
     text-align: center;
     margin-bottom: 27px;
+    
 }
+
+.date{
+    padding-left: 34%;
+ }
+
 
 form.form1 {
     padding-top: 40px;
@@ -130,4 +136,12 @@ a {
     .main {
         border-radius: 0px;
     }
+}
+
+h1{
+    text-align: center;
+}
+
+h3{
+    text-align: center;
 }

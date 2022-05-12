@@ -14,7 +14,7 @@
         <input class="un" type="password" name="password" align="center" placeholder="Password" value={{data[4]}}>
         <input class="un" type="text" name="surname" align="center" placeholder="Vorname" value={{data[1]}}>
         <input class="un" type="text" name="name" align="center" placeholder="Nachname" value={{data[2]}}>
-        <input class="un" type="date" name="birthday" align="center" placeholder="Geburstag" value={{data[5]}}>
+        <input class="un date" type="date" name="birthday" align="center" placeholder="Geburstag" value={{data[5]}}>
         <p>&nbsp;</p>
         <p>Anschrift:</p>  
         <p>&nbsp;</p>
@@ -27,29 +27,31 @@
         <p>&nbsp;</p>
         <p>
         Angaben zu vorherigen Impfungen:
-        Bist du geimpft:
-        
+        </p>
+        <p>&nbsp;</p>
+        <p>
         Wie oft wurdest du geimpft:
         </p>
         <p>&nbsp;</p>
         <input class="un" type="number" name="anzahl_impf" align="center" placeholder="0" value={{data[17]}}>
         <p>&nbsp;</p>
-        <p>Last Impf??</p>
+        <p>
+        Datum der letzten Impfung:
+        </p>
         <p>&nbsp;</p>
-        <input class="un" type="date" name="last_impf" align="center" placeholder="gestern" value={{data[19]}}>
+        <input class="un date" type="date" name="last_impf" align="center" placeholder="gestern" value={{data[19]}}>
         <p>&nbsp;</p>
         <p>   
-        Bist du genesen?
         Wie oft bist du genesen?
         </p>
         <p>&nbsp;</p>
         <input class="un" type="number" name="anzahl_rec" align="center" placeholder="2" value={{data[18]}}>
         <p>&nbsp;</p>
         <p>
-        Last RECC??
+        Datum der letzten Genesung:
         </p>
         <p>&nbsp;</p>
-        <input class="un" type="date" name="last_rec" align="center" placeholder="gestern" value={{data[20]}}>
+        <input class="un date" type="date" name="last_rec" align="center" placeholder="gestern" value={{data[20]}}>
         <p>&nbsp;</p>
         <button type="submit" class="submit" align="center">Fertig</button>    
         <p>&nbsp;</p> 
