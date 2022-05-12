@@ -4,18 +4,20 @@ from flask import Blueprint, render_template, request, session, redirect, url_fo
 
 from helpers.decorator import login_required
 from helpers.dateparse import parse
-from db import insert_request, select_request, select_request_all
+from db import insert_request, select_request, select_request_all, update_request
 
 impf_appointments = Blueprint("impf_appointments", __name__, template_folder="pages")
 
 @impf_appointments.route('/', methods=['POST', 'GET'])
 @login_required
 def main():
-    #username holen
+    print("test")
+
     def get_impf():
 
         timestamp = select_request_all(f"SELECT datetime FROM vax_appoints WHERE user_id='{session['id']}';")
-        impfnr = select_request_all(f"SELECT impf_id FROM vax_appoints WHERE user_id='{session['id']}';")    
+        impfnr = select_request_all(f"SELECT impf_id FROM vax_appoints WHERE user_id='{session['id']}';")   
+        appoints_id = select_request_all(f"SELECT vax_appoints_id FROM vax_appoints WHERE user_id='{session['id']}';")  
 
         data = []
         empty_list = []
@@ -37,12 +39,14 @@ def main():
             elif impf == "4":
                 impf = "NovoVax"
             empty_list.append(impf)
+            a_id = str(appoints_id[i])
+            empty_list.append(a_id)
 
             data.append(empty_list)
             empty_list = []
             i = i + 1
         return data
-    
+
     data = get_impf()
     is_admin = session["admin_logged_in"]
 
@@ -72,3 +76,12 @@ def main():
             is_admin = is_admin
         )
 
+@impf_appointments.route('/update/<id>/', methods=("POST","GET"))
+@login_required
+def update(id):    
+    id = id.replace("(","").replace(")","").replace(",","")
+
+    query = f"DELETE FROM vax_appoints WHERE vax_appoints_id={id} AND user_id={session['id']}"
+    update_request(query)
+
+    return redirect('/impf_appointments')

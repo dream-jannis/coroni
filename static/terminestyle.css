@@ -149,10 +149,20 @@ p{
     margin: 4.12px;
 }
 
-a {
+.del_btn{
     text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-    color: #a1ecba;
-    text-decoration: none
+    color:white;
+    background-color: #ed5b59;
+    text-decoration: none;
+    border-radius: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.del_btn:hover{
+    background-color: #cb2d2a;
 }
 
 @media (max-width: 600px) {

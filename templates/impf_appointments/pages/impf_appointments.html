@@ -27,11 +27,13 @@
     <tr>
         <th>Zeitpunkt</th>
         <th>Impfstoff</th>
+        <th></th>
     </tr>
     {% for item in data %}
     <tr>
         <td>{{item[0]}}</td>
         <td>{{item[1]}}</td>
+        <td><a class="del_btn" href="/impf_appointments/update/{{item[2]}}" class="action">Termin löschen</a></td>
     </tr>
     {% endfor %}
 

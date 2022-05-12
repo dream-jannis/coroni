@@ -102,6 +102,7 @@ def create_database():
 
     my_cursor.execute("""
         CREATE TABLE vax_appoints(
+            vax_appoints_id INT AUTO_INCREMENT PRIMARY KEY,
             user_id INT,
             datetime TIMESTAMP,
             impf_id INT,
