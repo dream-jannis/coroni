@@ -2,12 +2,12 @@ from flask import Blueprint, render_template, request, session, redirect, url_fo
 
 from helpers.decorator import login_required
 
-index = Blueprint("index", __name__, template_folder="pages")
+smiley = Blueprint("smiley", __name__, template_folder="pages")
 
-@index.route('')
+@smiley.route('')
 @login_required
 def main():
     is_admin = session["admin_logged_in"]
-    return render_template('index.html',
+    return render_template('smiley.html',
         is_admin = is_admin
     )

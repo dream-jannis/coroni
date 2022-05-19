@@ -24,7 +24,16 @@
             <li><a class="hov-nav" href="/t_appointments">Testtermin</a></li>
             <li><a class="hov-nav" href="/impf_appointments">Impftermin</a></li>
             <li><a class="hov-nav" href="/profil">Mein Profil</a></li>
-            <li><a class="hov-nav" href="/admin">Admin</a></li>
+            {% if is_admin %}
+            <div class="dropdown">
+              <li><a class="hov-nav dropbtn">Admin</a></li>
+              <div class="dropdown-content">
+                <a href="/admin/users">Alle Nutzer</a>
+                <a href="/admin/appointments/impf">Alle Impf-Termine</a>
+                <a href="/admin/appointments/test">Alle Test-Termine</a>
+              </div>
+            </div>
+            {% endif %}
             <li><a class="hov-nav" href="/login/logout">Logout</a></li>
           </ul>
           

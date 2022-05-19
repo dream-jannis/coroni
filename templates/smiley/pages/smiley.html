@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='smiley.css') }}">
+{% endblock %}
+{% block main %}
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="cooler_emoji">
+    <img src="{{ url_for('static', filename='cooler_emoji.png')}}">
+</div>
+{% endblock %}

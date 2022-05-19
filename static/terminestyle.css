@@ -1,12 +1,36 @@
-body {
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+  
+table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
     background-color: #67db9b;
-    font-family: 'Ubuntu', sans-serif;
+    color: white;
+}
+
+.form1{
+    text-align: center;
 }
 
 .main {
     background-color: #ffffff;
     width: 400px;
-    height: 400px;
+    height: 100%;
     margin: 7em auto;
     border-radius: 1.5em;
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
@@ -21,7 +45,7 @@ body {
 }
 
 .un {
-    width: 76%;
+
     color: rgb(38, 50, 56);
     font-weight: 700;
     font-size: 14px;
@@ -34,18 +58,16 @@ body {
     box-sizing: border-box;
     border: 2px solid rgba(0, 0, 0, 0.02);
     margin-bottom: 50px;
-    margin-left: 46px;
     text-align: center;
     margin-bottom: 27px;
     font-family: 'Ubuntu', sans-serif;
 }
 
 form.form1 {
-    padding-top: 40px;
+    padding-top: 20px;
 }
 
 .pass {
-        width: 76%;
     color: rgb(38, 50, 56);
     font-weight: 700;
     font-size: 14px;
@@ -58,10 +80,8 @@ form.form1 {
     box-sizing: border-box;
     border: 2px solid rgba(0, 0, 0, 0.02);
     margin-bottom: 50px;
-    margin-left: 46px;
     text-align: center;
     margin-bottom: 27px;
-    font-family: 'Ubuntu', sans-serif;
 }
 
 
@@ -71,6 +91,7 @@ form.form1 {
 }
 
 .submit {
+    margin-left: auto;
     cursor: pointer;
     border-radius: 5em;
     color: #fff;
@@ -80,14 +101,19 @@ form.form1 {
     padding-right: 40px;
     padding-bottom: 10px;
     padding-top: 10px;
+    margin-top: -20px;
+    margin-bottom: 50px;
     font-family: 'Ubuntu', sans-serif;
-    margin-left: 35%;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
 
 .submit:hover{
     background: rgb(109, 109, 109);
+}
+
+h2{
+    text-align: center;
 }
 
 .register{
@@ -101,7 +127,6 @@ form.form1 {
     padding-bottom: 10px;
     padding-top: 10px;
     font-family: 'Ubuntu', sans-serif;
-    margin-left: 34%;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
@@ -124,10 +149,20 @@ p{
     margin: 4.12px;
 }
 
-a {
+.del_btn{
     text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-    color: #a1ecba;
-    text-decoration: none
+    color:white;
+    background-color: #ed5b59;
+    text-decoration: none;
+    border-radius: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.del_btn:hover{
+    background-color: #cb2d2a;
 }
 
 @media (max-width: 600px) {
