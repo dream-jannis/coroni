@@ -1,6 +1,6 @@
 import re
 from unittest import TestCase
-from flask import Blueprint, redirect, render_template, request,session, url_for
+from flask import Blueprint, render_template, request,session
 
 from helpers.decorator import login_required
 from helpers.dateparse import parse
@@ -11,82 +11,53 @@ t_appointments = Blueprint("t_appointments", __name__, template_folder="pages")
 @t_appointments.route('/', methods=("POST","GET"))
 @login_required
 def main():
-    #username holen
-    def get_test():
+    #Daten aus DB abfragen
+    timestamp = select_request_all("SELECT datetime FROM test_appoints")#WHERE userid == session iwie sowas
+    result = select_request_all("SELECT result FROM test_appoints")
+   
 
-        timestamp = select_request_all(f"SELECT datetime FROM test_appoints WHERE user_id='{session['id']}';")
-        result = select_request_all(f"SELECT result FROM test_appoints WHERE user_id='{session['id']}';")
-        testtypenr = select_request_all(f"SELECT testtype_nr FROM test_appoints WHERE user_id='{session['id']}';")    
-        appoints_id = select_request_all(f"SELECT appoints_id FROM test_appoints WHERE user_id='{session['id']}';") 
+    data = []
+    i = 0
 
-        data = []
-        empty_list = []
-        i = 0
-
-        for row in timestamp:
-            timestamprow = parse(row)
-            empty_list.append(str(timestamprow))
-            tstnr = str(testtypenr[i])
-            tstnr = tstnr.replace("(","")
-            tstnr = tstnr.replace(")","")
-            tstnr = tstnr.replace(",","")
-            if tstnr == "1":
-                tstnr = "Schnelltest"
-            elif tstnr == "2":
-                tstnr = "PCR-Test"
-            elif tstnr == "3": 
-                tstnr = "AntiGen-Test"
-            empty_list.append(tstnr)
-
-            rslt = str(result[i])
-            if "None" in rslt:
-                rslt = "Ergebnis noch nicht verfügbar"
-                
-            empty_list.append(rslt)
-            
-            a_id = str(appoints_id[i])
-            empty_list.append(a_id)
-
-            data.append(empty_list)
-            empty_list = []
-            i = i + 1
-
-        return data
+    for row in timestamp:
+        timestamprow = parse(row)
+        data.append(str(timestamprow))
+        data.append(str(result[i]))
+        i = i + 1
     
-    data = get_test()
-    is_admin = session["admin_logged_in"]
-    
+
     if request.method == "POST":
         #Daten in DB eintragen
         testdate = request.form["date"]
         testtime = request.form["time"]
-        testtype = request.form["testtype"]
         testdt = (f"{testdate} {testtime}:00")
 
-    
+        #username holen
+        usern = session["username"]
+
+        #testart holen
+        testtype = request.form["testtype"]
+        print(testtype)  
+
+        usern_to_id = select_request(f"SELECT customer_id FROM customers WHERE email = '{usern}';")
+        usern_to_id = usern_to_id[0]
+
+
         testtype_id = select_request(f"SELECT testtype_nr FROM test_type WHERE testmethod = '{testtype}' ")
         testtype_id = testtype_id[0]
-        
-        insert_request(f"INSERT INTO test_appoints(user_id, datetime, testtype_nr ) VALUES({session['id']}, '{testdt}', {testtype_id})")
+        data.append(str(testtype_id))
+        print(testtype_id)
+
+        insert_request(f"INSERT INTO test_appoints(customer_id, datetime, testtype_nr ) VALUES({usern_to_id}, '{testdt}', {testtype_id})")
         #update_request(f"UPDATE test_appoints SET testtype_nr = {testtype_id} WHERE ")
-        data = get_test()
+        print(data)
+
+        
         return render_template('t_appointments.html', 
             data = data,
-            is_admin = is_admin
         )
 
     else:
         return render_template('t_appointments.html',
-            data = data,
-            is_admin = is_admin
+            data = data, 
         )
-
-@t_appointments.route('/update/<id>/', methods=("POST","GET"))
-@login_required
-def update(id):
-    id = id.replace("(","").replace(")","").replace(",","")
-
-    query = f"DELETE FROM test_appoints WHERE appoints_id={id} AND user_id={session['id']}"
-    update_request(query)
-
-    return redirect('/t_appointments')
