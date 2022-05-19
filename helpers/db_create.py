@@ -4,7 +4,7 @@ import mysql.connector
 
 hostname = "localhost"
 username = "root"
-password = "password"
+password = "root"
 #datab = "coronacentre"
 
 mydb = mysql.connector.connect(
