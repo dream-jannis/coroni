@@ -1,2 +1,2 @@
 # Mysql muss instaliert sein!
-# Credentials zu MySQL muss in Secrets.py angegben werden.
+# Credentials zu MySQL muss in helpers/coronisecrets.py angegben werden.
