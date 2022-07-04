@@ -1,11 +1,6 @@
 import mysql.connector
 #from helpers.db_create import create_database
-#from coronisecrets import hostname, username, password,datab
-
-hostname = "localhost"
-username = "root"
-password = "root"
-#datab = "coronacentre"
+from coronisecrets import hostname, username, password,datab
 
 mydb = mysql.connector.connect(
     host = hostname,
