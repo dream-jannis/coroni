@@ -1,5 +1,5 @@
 import mysql.connector
-#from helpers.db_create import create_database
+
 from helpers.coronisecrets import hostname, username, password,datab
 
 mydb = mysql.connector.connect(
