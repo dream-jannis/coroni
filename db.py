@@ -1,14 +1,7 @@
-from logging import root
 import mysql.connector
 
+from helpers.coronisecrets import hostname, username, password, datab
 
-#from coronisecrets import hostname, username, password, datab
-
-
-hostname = "localhost"
-username = "root"
-password = "password"
-datab = "coronacentre"
 
 #SELECT ONE ROW OF DATA
 def select_request(query):
